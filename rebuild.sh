@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-debug_nv2a=1
+# Print nv2a debug messages to stdout
+debug_nv2a=0
+
+# Enable various OpenGL debugging functions.
 debug_nv2a_gl=1
+
+# Add a callback via glDebugMessageCallback to print OpenGL debug messages to
+# stderr.
 stream_gl_debug_messages=1
+
 enable_renderdoc="--enable-renderdoc"
 
 while [ ! -z "${1}" ]
@@ -45,4 +52,3 @@ CFLAGS="${cflags}" \
       --debug \
       -j8 \
       "${enable_renderdoc}"
-
