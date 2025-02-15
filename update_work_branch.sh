@@ -2,7 +2,10 @@
 
 set -eu
 
-declare -a ignored_branches=("debug/nv2a_debugger")
+declare -a ignored_branches=(
+  "debug/forces_xbdm_port_forward"
+  "debug/nv2a_debugger"
+)
 
 
 unstaged_changes=$(git status --porcelain | grep "^ M" | wc -l)
@@ -17,8 +20,10 @@ git checkout master
 git pull upstream master
 git push origin master
 
-current_timestamp=$(date +%Y%m%d%H%M%S)
-git branch -M work "oldwork-${current_timestamp}"
+if [[ $(git branch --list "work") != "" ]]; then
+  current_timestamp=$(date +%Y%m%d%H%M%S)
+  git branch -M work "oldwork-${current_timestamp}"
+fi
 
 git checkout -b work
 
