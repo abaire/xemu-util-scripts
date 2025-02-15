@@ -1,0 +1,6 @@
+# Set a breakpoint at program entry so that SIGUSR2 can be ignored.
+breakpoint set -n main
+breakpoint command add
+process handle -n true -p true -s false SIGUSR2
+continue
+DONE
