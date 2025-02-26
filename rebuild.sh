@@ -16,6 +16,22 @@ enable_renderdoc="--enable-renderdoc"
 while [ ! -z "${1}" ]
 do
   case "${1}" in
+    '--nv2a'*)
+      debug_nv2a=1
+      shift
+      ;;
+
+    '--gl'*)
+      debug_nv2a_gl=1
+      stream_gl_debug_messages=1
+      shift
+      ;;
+
+    '--renderdoc'*)
+      enable_renderdoc="--enable-renderdoc"
+      shift
+      ;;
+
     '--no-nv2a'*)
       debug_nv2a=0
       debug_nv2a_gl=0
@@ -33,6 +49,7 @@ do
       enable_renderdoc=" "
       shift
       ;;
+
     *)
       echo "Unknown argument ${1}"
       break
