@@ -15,12 +15,18 @@ current_branch=$(git symbolic-ref --short HEAD)
 readonly current_branch
 
 use_vulkan=""
+suite_filters=()
 
 set +u
 while [ ! -z "${1}" ]; do
   case "${1}" in
   '--use-vulkan'*)
     use_vulkan="--use-vulkan"
+    shift
+    ;;
+  '-s'*)
+    shift
+    suite_filters+=("${1}")
     shift
     ;;
   *)
@@ -98,11 +104,18 @@ function execute_tests() {
     --xemu "${xemu_binary}"
     --no-bundle
     -f
-    "${use_vulkan}"
   )
 
-  echo "Executing tests: ${command[*]}"
-  output=$(${command[*]} 2>&1)
+  if [[ "${use_vulkan}" != "" ]]; then
+    command+=( "${use_vulkan}" )
+  fi
+
+  if [[ ${#suite_filters[@]} -ne 0 ]]; then
+    command+=( --just-suites "${suite_filters[@]}" )
+  fi
+
+  echo "Executing tests: ${command[@]}"
+  output=$( "${command[@]}" 2>&1 )
   exit_result=$?
   set -e
 
@@ -125,4 +138,3 @@ echo "1. Examine outputs in ${xemu_dev_pgraph_test_results_path}."
 echo "2. 'git commit' them to the new branch."
 echo "3. 'git push' the branch to the upstream."
 echo "4. Create a new PR and wait for the GitHub workflow to populate the wiki."
-
