@@ -90,6 +90,8 @@ function create_branch {
 
   echo "Switching to ${current_branch}"
   git checkout "${current_branch}" 2> /dev/null || git checkout -b "${current_branch}" 2> /dev/null
+
+  rm -rf results/xemu*
 }
 
 function execute_tests() {
