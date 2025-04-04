@@ -22,8 +22,12 @@ done
 script_dir="$(dirname "${0}")"
 readonly script_dir
 
-darwin_lib_subpath="${script_dir}/dist/xemu.app/Contents/Libraries/$(uname -m)"
-darwin_lib_path=$(realpath "${darwin_lib_subpath}")
+if [[ $(uname) == "Darwin" ]]; then
+  darwin_lib_subpath="${script_dir}/dist/xemu.app/Contents/Libraries/$(uname -m)"
+  darwin_lib_path=$(realpath "${darwin_lib_subpath}")
+else
+  darwin_lib_path=""
+fi
 
 set -x
 DYLD_FALLBACK_LIBRARY_PATH="${darwin_lib_path}" "${command[@]}"
