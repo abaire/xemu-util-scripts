@@ -68,4 +68,5 @@ CFLAGS="${cflags}" \
       ./build.sh \
       --debug \
       -j8 \
+      --enable-plugins \
       "${enable_renderdoc}"
