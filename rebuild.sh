@@ -65,6 +65,7 @@ cflags="-DDEBUG_NV2A=${debug_nv2a} \
 
 CFLAGS="${cflags}" \
       LDFLAGS="-L/home/abaire/bin/renderdoc/lib" \
+      CMAKE="$(which cmake)" \
       ./build.sh \
       --debug \
       -j8 \
