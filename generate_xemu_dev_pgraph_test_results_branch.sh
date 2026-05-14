@@ -106,6 +106,8 @@ function execute_tests() {
     --xemu "${xemu_binary}"
     --no-bundle
     -f
+    -S 4
+    -v
   )
 
   if [[ "${use_vulkan}" != "" ]]; then
