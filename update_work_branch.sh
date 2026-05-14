@@ -5,6 +5,8 @@ set -eu
 declare -a ignored_branches=(
   "debug/forces_xbdm_port_forward"
   "debug/nv2a_debugger"
+  "debug/video_profiler"  # Requires manual merge, has perf impact
+  "debug/toggle_pgraph_trace_with_f9"  # Included in dump_full_state_and_trace_with_f9
 )
 
 
