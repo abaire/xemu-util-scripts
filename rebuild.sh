@@ -64,6 +64,7 @@ cflags="-DDEBUG_NV2A=${debug_nv2a} \
       -DSTREAM_GL_DEBUG_MESSAGES=${stream_gl_debug_messages}"
 
 CFLAGS="${cflags}" \
+      OBJCFLAGS="${OBJCFLAGS:--fno-objc-msgsend-class-selector-stubs}" \
       LDFLAGS="-L/home/abaire/bin/renderdoc/lib" \
       CMAKE="$(which cmake)" \
       ./build.sh \
