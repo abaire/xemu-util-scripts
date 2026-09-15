@@ -5,10 +5,10 @@ set -eu
 declare -a ignored_branches=(
   "debug/forces_xbdm_port_forward"
   "debug/nv2a_debugger"
-  "debug/video_profiler"  # Requires manual merge, has perf impact
-  "debug/toggle_pgraph_trace_with_f9"  # Included in dump_full_state_and_trace_with_f9
+  "debug/video_profiler"              # Requires manual merge, has perf impact
+  "debug/toggle_pgraph_trace_with_f9" # Included in dump_full_state_and_trace_with_f9
+  "debug/dump_gl_extensions"          # Requires manual merge, not generally needed
 )
-
 
 unstaged_changes=$(git status --porcelain | grep "^ M" | wc -l)
 #untracked_files=$(git status --porcelain | grep "^??" | wc -l)
@@ -39,13 +39,13 @@ git branch --list "debug/*" | while IFS= read -r branch; do
   if [[ " ${ignored_branches[@]} " == *" $branch "* ]]; then
     continue
   fi
-  
+
   echo "${branch}"
 
   git merge "${branch}"
 
   echo ""
-  
+
 done
 
 echo "To update the remote:"

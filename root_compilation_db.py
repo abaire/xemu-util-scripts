@@ -80,7 +80,7 @@ def transform_arguments(
 
 
 def main():
-    root_dir = Path(__file__).resolve().parent
+    root_dir = Path(__file__).absolute().parent
     build_dir = root_dir / "build"
     src_db = build_dir / "compile_commands.json"
     dst_db = root_dir / "compile_commands.json"
